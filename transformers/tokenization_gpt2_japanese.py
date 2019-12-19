@@ -18,6 +18,7 @@ from __future__ import (absolute_import, division, print_function,
 
 import sys
 import json
+import collections
 import logging
 import os
 import regex as re
@@ -67,9 +68,12 @@ class GPT2JapaneseTokenizer(PreTrainedTokenizer):
     pretrained_init_configuration = PRETRAINED_INIT_CONFIGURATION
     max_model_input_sizes = PRETRAINED_POSITIONAL_EMBEDDINGS_SIZES
 
-    def __init__(self, vocab_file, errors='replace', unk_token="<|endoftext|>",
+    def __init__(self, vocab_file, do_lower_case=False,
+                 do_word_tokenize=True, do_subword_tokenize=True,
+                 word_tokenizer_type='basic', subword_tokenizer_type='wordpiece', never_split=None,
+                 errors='replace', unk_token="<|endoftext|>",
                  bos_token="<|endoftext|>", eos_token="<|endoftext|>", **kwargs):
-        super(GPT2Tokenizer, self).__init__(bos_token=bos_token, eos_token=eos_token, unk_token=unk_token, **kwargs)
+        super(GPT2JapaneseTokenizer, self).__init__(bos_token=bos_token, eos_token=eos_token, unk_token=unk_token, **kwargs)
         self.max_len_single_sentence = self.max_len # no default special tokens - you can update this value if you add special tokens
         self.max_len_sentences_pair = self.max_len # no default special tokens - you can update this value if you add special tokens
 
