@@ -523,10 +523,11 @@ def main():
     if args.block_size <= 0:
         args.block_size = tokenizer.max_len_single_sentence  # Our input block size will be the max possible for the model
     args.block_size = min(args.block_size, tokenizer.max_len_single_sentence)
-    model = model_class.from_pretrained(args.model_name_or_path,
-                                        from_tf=bool('.ckpt' in args.model_name_or_path),
-                                        config=config,
-                                        cache_dir=args.cache_dir if args.cache_dir else None)
+    # model = model_class.from_pretrained(args.model_name_or_path,
+    #                                     from_tf=bool('.ckpt' in args.model_name_or_path),
+    #                                     config=config,
+    #                                     cache_dir=args.cache_dir if args.cache_dir else None)
+    model = model_class(config)
     model.to(args.device)
 
     if args.local_rank == 0:
