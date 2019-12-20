@@ -84,7 +84,7 @@ class TextDataset(Dataset):
                 for i, text in enumerate(f):
                     tokenized = tokenizer.convert_tokens_to_ids(tokenizer.tokenize(text))
                     tokenized_text.append(tokenized)
-                    if i % 10000 == 0:
+                    if (i + 1) % 10000 == 0:
                         logger.info("read %i lines ...", i)
 
             tokenized_text = sum(tokenized_text, []) # flatten
