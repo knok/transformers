@@ -29,6 +29,7 @@ import pickle
 import random
 import re
 import shutil
+from itertools import chain
 
 import numpy as np
 import torch
@@ -87,7 +88,7 @@ class TextDataset(Dataset):
                     if (i + 1) % 10000 == 0:
                         logger.info("read %i lines ...", i + 1)
 
-            tokenized_text = [item for sublist in tokenized_text for item in sublist] # flatten
+            tokenized_text = list(chain.from_iterable(tokenized_text))
 
             for i in range(0, len(tokenized_text)-block_size+1, block_size): # Truncate in block of block_size
                 self.examples.append(tokenizer.build_inputs_with_special_tokens(tokenized_text[i:i+block_size]))
