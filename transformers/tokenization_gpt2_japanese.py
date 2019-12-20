@@ -61,7 +61,7 @@ PRETRAINED_INIT_CONFIGURATION = {
     },
 }
 
-class GPT2JapaneseTokenizer(BertTokenizer):
+class GPT2JapaneseTokenizer(PreTrainedTokenizer):
     """GPT-2 Japanese Tokenizer"""
     vocab_files_names = VOCAB_FILES_NAMES
     pretrained_vocab_files_map = PRETRAINED_VOCAB_FILES_MAP
@@ -123,3 +123,11 @@ class GPT2JapaneseTokenizer(BertTokenizer):
             split_tokens = tokens
 
         return split_tokens
+
+    def _convert_token_to_id(self, token):
+        """ Converts a token (str/unicode) in an id using the vocab. """
+        return self.vocab.get(token, self.vocab.get(self.unk_token))
+
+    def _convert_id_to_token(self, index):
+        """Converts an index (integer) in a token (string/unicode) using the vocab."""
+        return self.ids_to_tokens.get(index, self.unk_token)
