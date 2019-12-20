@@ -81,9 +81,11 @@ class TextDataset(Dataset):
             self.examples = []
             tokenized_text = []
             with open(file_path, encoding="utf-8") as f:
-                text = f.read()
-                tokenized = tokenizer.convert_tokens_to_ids(tokenizer.tokenize(text))
-                tokenized_text.append(tokenized)
+                for i, text in enumerate(f):
+                    tokenized = tokenizer.convert_tokens_to_ids(tokenizer.tokenize(text))
+                    tokenized_text.append(tokenized)
+                    if i % 10000:
+                        logger.info("read %i lines ...", i)
 
             tokenized_text = sum(tokenized_text, []) # flatten
 
