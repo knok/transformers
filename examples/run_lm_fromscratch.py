@@ -83,11 +83,11 @@ class TextDataset(Dataset):
             with open(file_path, encoding="utf-8") as f:
                 for i, text in enumerate(f):
                     tokenized = tokenizer.convert_tokens_to_ids(tokenizer.tokenize(text))
-                    tokenized_text.extend(tokenized)
+                    tokenized_text.append(tokenized)
                     if (i + 1) % 10000 == 0:
-                        logger.info("read %i lines ...", i)
+                        logger.info("read %i lines ...", i + 1)
 
-            # tokenized_text = sum(tokenized_text, []) # flatten
+            tokenized_text = [item for sublist in tokenized_text for item in sublist] # flatten
 
             for i in range(0, len(tokenized_text)-block_size+1, block_size): # Truncate in block of block_size
                 self.examples.append(tokenizer.build_inputs_with_special_tokens(tokenized_text[i:i+block_size]))
