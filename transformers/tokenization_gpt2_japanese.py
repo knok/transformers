@@ -61,7 +61,7 @@ PRETRAINED_INIT_CONFIGURATION = {
     },
 }
 
-class GPT2JapaneseTokenizer(PreTrainedTokenizer):
+class GPT2JapaneseTokenizer(BertTokenizer):
     """GPT-2 Japanese Tokenizer"""
     vocab_files_names = VOCAB_FILES_NAMES
     pretrained_vocab_files_map = PRETRAINED_VOCAB_FILES_MAP
@@ -71,9 +71,9 @@ class GPT2JapaneseTokenizer(PreTrainedTokenizer):
     def __init__(self, vocab_file, do_lower_case=False,
                  do_word_tokenize=True, do_subword_tokenize=True,
                  word_tokenizer_type='basic', subword_tokenizer_type='wordpiece', never_split=None,
-                 errors='replace', unk_token="<|endoftext|>",
+                 errors='replace', unk_token="[UNK]",
                  bos_token="<|endoftext|>", eos_token="<|endoftext|>", **kwargs):
-        super(GPT2JapaneseTokenizer, self).__init__(bos_token=bos_token, eos_token=eos_token, unk_token=unk_token, **kwargs)
+        super(GPT2JapaneseTokenizer, self).__init__(vocab_file=vocab_file,bos_token=bos_token, eos_token=eos_token, unk_token=unk_token, **kwargs)
         self.max_len_single_sentence = self.max_len # no default special tokens - you can update this value if you add special tokens
         self.max_len_sentences_pair = self.max_len # no default special tokens - you can update this value if you add special tokens
 
