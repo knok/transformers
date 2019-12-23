@@ -111,6 +111,10 @@ class GPT2JapaneseTokenizer(PreTrainedTokenizer):
                 raise ValueError(
                     "Invalid subword_tokenizer_type '{}' is specified.".format(subword_tokenizer_type))
 
+    @property
+    def vocab_size(self):
+        return len(vocab)
+
     def _tokenize(self, text):
         if self.do_word_tokenize:
             tokens = self.word_tokenizer.tokenize(text,
