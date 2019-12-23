@@ -74,6 +74,8 @@ class GPT2JapaneseTokenizer(PreTrainedTokenizer):
                  errors='replace', unk_token="[UNK]",
                  bos_token="<|endoftext|>", eos_token="<|endoftext|>", **kwargs):
         super(GPT2JapaneseTokenizer, self).__init__(vocab_file=vocab_file,bos_token=bos_token, eos_token=eos_token, unk_token=unk_token, **kwargs)
+        if self.max_len > 1e4:
+            self.max_len = 1024 # shrink
         self.max_len_single_sentence = self.max_len # no default special tokens - you can update this value if you add special tokens
         self.max_len_sentences_pair = self.max_len # no default special tokens - you can update this value if you add special tokens
 
