@@ -84,6 +84,9 @@ class TextDataset(Dataset):
             with open(file_path, encoding="utf-8") as f:
                 for i, text in enumerate(f):
                     tokenized = tokenizer.convert_tokens_to_ids(tokenizer.tokenize(text))
+                    if None in tokenized:
+                        print(tokenized)
+                        pass
                     tokenized_text.append(tokenized)
                     if (i + 1) % 10000 == 0:
                         logger.info("read %i lines ...", i + 1)
