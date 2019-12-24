@@ -137,3 +137,25 @@ class GPT2JapaneseTokenizer(PreTrainedTokenizer):
     def _convert_id_to_token(self, index):
         """Converts an index (integer) in a token (string/unicode) using the vocab."""
         return self.ids_to_tokens.get(index, self.unk_token)
+
+    def save_pretrained(self, save_directory):
+        if not os.path.isdir(save_directory):
+            logger.error("Saving directory ({}) should be a directory".format(save_directory))
+            return
+
+        vocab_files = self.save_vocabulary(save_directory)
+
+        return vocab_files
+
+    def save_vocabulary(self, save_directory):
+        """Save the tokenizer vocabulary and merge files to a directory."""
+        if not os.path.isdir(save_directory):
+            logger.error("Vocabulary path ({}) should be a directory".format(save_directory))
+            return
+        vocab_file = os.path.join(save_directory, VOCAB_FILES_NAMES['vocab_file'])
+
+        with open(vocab_file, 'w', encoding='utf-8') as f:
+            for val in self.vocab:
+                f.write(val)
+
+        return vocab_file
