@@ -113,7 +113,7 @@ class GPT2JapaneseTokenizer(PreTrainedTokenizer):
 
     @property
     def vocab_size(self):
-        return len(self.vocab)
+        return len(vocab)
 
     def _tokenize(self, text):
         if self.do_word_tokenize:
