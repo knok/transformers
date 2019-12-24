@@ -79,14 +79,18 @@ class TextDataset(Dataset):
         else:
             logger.info("Creating features from dataset file at %s", directory)
 
+            lines = 0
+            with open(file_path) as f:
+                for line in f:
+                    lines += 1
+
             self.examples = []
             tokenized_text = []
-            with open(file_path, encoding="utf-8") as f:
+            with open(file_path, encoding="utf-8") as f, tqdm(total=lines) as pbar:
                 for i, text in enumerate(f):
                     tokenized = tokenizer.convert_tokens_to_ids(tokenizer.tokenize(text))
                     tokenized_text.append(tokenized)
-                    if (i + 1) % 10000 == 0:
-                        logger.info("read %i lines ...", i + 1)
+                    pbar.update()
 
             tokenized_text = list(chain.from_iterable(tokenized_text))
 
