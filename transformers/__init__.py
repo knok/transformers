@@ -44,6 +44,7 @@ from .tokenization_bert_japanese import BertJapaneseTokenizer, MecabTokenizer, C
 from .tokenization_openai import OpenAIGPTTokenizer
 from .tokenization_transfo_xl import (TransfoXLTokenizer, TransfoXLCorpus)
 from .tokenization_gpt2 import GPT2Tokenizer
+from .tokenization_gpt2_japanese import GPT2JapaneseTokenizer
 from .tokenization_ctrl import CTRLTokenizer
 from .tokenization_xlnet import XLNetTokenizer, SPIECE_UNDERLINE
 from .tokenization_xlm import XLMTokenizer
