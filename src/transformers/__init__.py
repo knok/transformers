@@ -109,6 +109,7 @@ from .tokenization_camembert import CamembertTokenizer
 from .tokenization_ctrl import CTRLTokenizer
 from .tokenization_distilbert import DistilBertTokenizer
 from .tokenization_gpt2 import GPT2Tokenizer, GPT2TokenizerFast
+from .tokenization_gpt2_japanese import GPT2JapaneseTokenizer
 from .tokenization_openai import OpenAIGPTTokenizer
 from .tokenization_roberta import RobertaTokenizer
 from .tokenization_t5 import T5Tokenizer
